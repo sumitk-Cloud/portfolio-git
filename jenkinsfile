@@ -1,0 +1,52 @@
+pipeline {
+    agent any
+
+    environment {
+        SSH_CRED = 'node-app-ssh-key'               // Jenkins credential ID
+        SERVER_IP = '172.31.89.103'          // Your Deploy EC2(ubuntu) IP (private)
+        REMOTE_USER = 'ubuntu'
+        WEB_DIR = '/var/www/html/'
+    }
+
+    stages {
+        stage('Clone Repo') {
+            steps {
+                git url: 'https://github.com/surajjagtap221/portfolio-deployment-CICD.git', branch: 'master'
+            }
+        }
+
+        
+        stage('Install and configure Apache') {
+            steps {
+                sshagent(credentials: ["${SSH_CRED}"]) {
+                    sh '''
+                        echo "Installing Apache on server..."
+                        ssh -o StrictHostKeyChecking=no ${REMOTE_USER}@${SERVER_IP} '
+                            sudo apt update &&
+                            sudo apt install apache2 -y &&
+                            sudo systemctl start apache2 &&
+                            sudo systemctl enable apache2
+                        '
+                    '''
+                }
+            }
+        }
+
+        stage('Deploy to Apache Server') {
+            steps {
+                sshagent(credentials: ["${SSH_CRED}"]) {
+                    sh '''
+                        echo "Cleaning old files on server..."
+                        ssh -o StrictHostKeyChecking=no ${REMOTE_USER}@${SERVER_IP} "sudo rm -rf ${WEB_DIR}/*"
+
+                        echo "Uploading new files to /tmp on server..."
+                        scp -r index.html css js fonts images ${REMOTE_USER}@${SERVER_IP}:/tmp/
+
+                        echo "Deploying files to Apache directory..."
+                        ssh -o StrictHostKeyChecking=no ${REMOTE_USER}@${SERVER_IP} "sudo cp -r /tmp/index.html /tmp/css /tmp/js /tmp/fonts /tmp/images ${WEB_DIR}/"
+                    '''
+                }
+            }
+        }
+    }
+}
