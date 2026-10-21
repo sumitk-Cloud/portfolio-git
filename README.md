@@ -61,7 +61,7 @@ Developer → Git Push → GitHub Repository → GitHub Actions Workflow → AWS
 
 ### 5. IAM Roles Attached
 
-![IAM Roles](screenshots/IAM-Roles.png)
+![IAM Roles](IAM-Roles-Attached.png)
 
 ### 6. Successful Deployment
 
