@@ -53,7 +53,7 @@ Developer → Git Push → GitHub Repository → GitHub Actions Workflow → AWS
 
 ### 3. Amazon S3 Bucket
 
-![Amazon S3 Bucket](screenshots/s3-bucket.png)
+![Amazon S3 Bucket](screenshots/portfolio-git.png)
 
 ### 4. GitHub Repository Secrets
 
@@ -61,7 +61,7 @@ Developer → Git Push → GitHub Repository → GitHub Actions Workflow → AWS
 
 ### 5. IAM Roles Attached
 
-![IAM Roles](IAM-Roles-Attached.png)
+![IAM Roles](screenshots/IAM-Roles.png)
 
 ### 6. Successful Deployment
 
