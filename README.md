@@ -43,8 +43,6 @@ Developer → Git Push → GitHub Repository → GitHub Actions Workflow → AWS
 
 ### 1. Portfolio Website
 
-![Portfolio Website](screenshots/portfolio.png)
-
 **Live Website:** [View My Portfolio](http://bucket-portfolio-gitaction-231op.s3-website.ap-south-1.amazonaws.com/#contact)
 
 ### 2. GitHub Actions CI/CD Pipeline
@@ -57,7 +55,7 @@ Developer → Git Push → GitHub Repository → GitHub Actions Workflow → AWS
 
 ### 4. GitHub Repository Secrets
 
-![Repository Secrets](screenshots/repository-secrets.png)
+![Repository Secrets](screenshots/Repository-Secrets.png)
 
 ### 5. IAM Roles Attached
 
